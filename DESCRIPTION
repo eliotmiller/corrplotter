@@ -5,7 +5,7 @@ Authors@R: person("Eliot", "Miller", email = "eliot.isaac@gmail.com", role = c("
 Description: This makes fairly flexible paneled correlation plots, where you can
     change colors, breaks in histograms, axis labels, etc., as you see fit.
 Depends:
-    R (>= 3.3.0)
+    R (>= 3.2.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
