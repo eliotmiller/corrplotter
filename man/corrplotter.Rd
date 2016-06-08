@@ -4,14 +4,15 @@
 \alias{corrplotter}
 \title{Function to produce correlation panel plots}
 \usage{
-corrplotter(dataframe, colIDs, hist.breaks, hist.col, hist.names, text.cex,
-  neg.color, mid.color, pos.color, par.oma, par.tcl, par.mgp, par.lab,
-  left.text, bottom.text, expansion, ...)
+corrplotter(dataframe, ids, hist.breaks, hist.col, hist.names, hist.names.cex,
+  hist.names.spacing, hist.y, summary.cex, neg.color, mid.color, pos.color,
+  par.oma, par.tcl, par.mgp, par.lab, left.text, bottom.text, left.text.cex,
+  bottom.text.cex, expansion, ...)
 }
 \arguments{
 \item{dataframe}{The object you want to pull data from to plot.}
 
-\item{colIDs}{Optional vector of column IDs or names you want to plot from dataframe.}
+\item{ids}{Optional vector of column IDs or names you want to plot from dataframe.}
 
 \item{hist.breaks}{The number of breaks desired in the diagonal histograms. Default is
 10.}
@@ -21,7 +22,16 @@ corrplotter(dataframe, colIDs, hist.breaks, hist.col, hist.names, text.cex,
 \item{hist.names}{The titles to be printed above histograms, if desired. Will be left
 blank if not provided.}
 
-\item{text.cex}{The size of the summary stat text in the upper half of the plots.
+\item{hist.names.cex}{The size of the hist.names titles. Defaults to 1.}
+
+\item{hist.names.spacing}{The space of the title below the top of the histogram plot.
+Default is -2. Increasing this number will move the title closer to the top of the
+panel.}
+
+\item{hist.y}{The y-axis label in the diagonal histograms. Defaults to blank, but can
+be set to, e.g., "Frequency".}
+
+\item{summary.cex}{The size of the summary stat text in the upper half of the plots.
 Default is 2.}
 
 \item{neg.color}{The background color of the panel in the upper half of the plots for
@@ -55,12 +65,16 @@ of the vector be equal to "".}
 
 \item{bottom.text}{Like left.text, but for the bottom axis labels.}
 
+\item{left.text.cex}{The size of the left.text labels. Defaults to 1.}
+
+\item{bottom.text.cex}{The size of the bottom.text labels. Defaults to 1.}
+
 \item{expansion}{Controls how much the histogram is shrunk down to facilitate plotting
 of histogram names. Also controls how zoomed out the scatterplots are, which might be
 useful for ensuring dots do not interfere with axis labels.}
 
-\item{...}{Other arguments that can be passed to plot, including cex for the size of
-the dots in the scatterplot.}
+\item{...}{Other arguments that can be passed to plot, including cex and color for the
+dots in the scatterplot. If you are getting an error here involving}
 }
 \value{
 A paneled correlation plot.
@@ -71,9 +85,9 @@ triangle of panels shows the x,y relationship, the diagonal shows a histogram of
 column of data, and the upper triangle summarizes the correlation.
 }
 \details{
-This function sends out jobs to as many cores as are specified. Each 
-randomizes the input CDM according to all defined null models, then calculates each
-observed metric on each randomized matrix.
+There are a large variety of options that can be customized on this function,
+but fundamentally it places scatterplots in the lower triangle of the plot, histograms
+along the diagram, and a summary of the correlation in the upper triangle.
 }
 \examples{
 exData <- data.frame(
@@ -83,8 +97,8 @@ col3=jitter(sort(rnorm(n=200, mean=-3, sd=1)), amount=3))
 
 corrplotter(dataframe=exData, hist.breaks=20, hist.col="purple",
 hist.names=c("one","two","three"), left.text=c("units1", "units2", ""),
-bottom.text=c("other_units1", "other_units2", ""),
-text.cex=2, neg.color=c(1,0,0,1), mid.color=c(1,1,0,1), pos.color=c(0,1,0,1),
+bottom.text=c("other_units1", "other_units2", "other_units3"),
+summary.cex=2, neg.color=c(1,0,0,1), mid.color=c(1,1,0,1), pos.color=c(0,1,0,1),
 expansion=0.5, cex=0.5, col="gray")
 }
 

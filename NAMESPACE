@@ -3,6 +3,7 @@
 export(corrplotter)
 importFrom(grDevices,colorRampPalette)
 importFrom(grDevices,rgb)
+importFrom(graphics,axis)
 importFrom(graphics,hist)
 importFrom(graphics,mtext)
 importFrom(graphics,par)
