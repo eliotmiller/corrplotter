@@ -320,8 +320,13 @@ corrplotter <- function(dataframe, ids, hist.breaks, hist.col, hist.names,
 				#create a temporary histogram so you can determine what the maximum is
 				#and expand y-axis accordingly
 				tempHist <- hist(dataframe[,j], breaks=hist.breaks, plot=FALSE)
+				#calculate the range between the default xlim
+				xRange <- diff(range(tempHist$breaks))
 				hist(dataframe[,j], main="", breaks=hist.breaks, col=hist.col,
-					ylim=c(0, max(tempHist$counts) * (1 + expansion)))
+					ylim=c(0, max(tempHist$counts) * (1 + expansion)),
+					xlim=c(	min(tempHist$breaks) - (xRange * expansion),
+							max(tempHist$breaks) + (xRange * expansion)))
+				#add the y-axis labels and titles
 				axis(side=2, labels=hist.y, tick=FALSE,
 					at=max(tempHist$counts) * (1 + expansion)/2, line=-1.5)
 				title(hist.names[i], line=hist.names.spacing, cex.main=hist.names.cex)
