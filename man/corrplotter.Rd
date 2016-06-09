@@ -49,7 +49,8 @@ with alpha 0.5.}
 \item{par.oma}{Used to format the space around the entire plot (the area outside all
 panels). The format is c(bottom, left, top, right). Default is c(4, 4, 2, 2).}
 
-\item{par.tcl}{Used to control the length of the tick marks inside the panels.}
+\item{par.tcl}{Used to control the length of the tick marks inside the panels. Default
+is -0.25.}
 
 \item{par.mgp}{Used to control the distance of the labels from the tick marks inside
 the panels. Default is c(2, 0.2, 0).}
@@ -74,14 +75,14 @@ of histogram names. Also controls how zoomed out the scatterplots are, which mig
 useful for ensuring dots do not interfere with axis labels.}
 
 \item{...}{Other arguments that can be passed to plot, including cex and color for the
-dots in the scatterplot. If you are getting an error here involving}
+dots in the scatterplot.}
 }
 \value{
 A paneled correlation plot.
 }
 \description{
 Fairly versatile function to produce paneled correlation plots, where the lower
-triangle of panels shows the x,y relationship, the diagonal shows a histogram of each,
+triangle of panels shows the x,y relationship, the diagonal shows a histogram of each
 column of data, and the upper triangle summarizes the correlation.
 }
 \details{

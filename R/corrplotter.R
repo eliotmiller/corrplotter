@@ -1,7 +1,7 @@
 #' Function to produce correlation panel plots
 #'
 #' Fairly versatile function to produce paneled correlation plots, where the lower
-#' triangle of panels shows the x,y relationship, the diagonal shows a histogram of each,
+#' triangle of panels shows the x,y relationship, the diagonal shows a histogram of each
 #' column of data, and the upper triangle summarizes the correlation.
 #'
 #' @param dataframe The object you want to pull data from to plot.
@@ -30,7 +30,8 @@
 #' with alpha 0.5.
 #' @param par.oma Used to format the space around the entire plot (the area outside all
 #' panels). The format is c(bottom, left, top, right). Default is c(4, 4, 2, 2).
-#' @param par.tcl Used to control the length of the tick marks inside the panels.
+#' @param par.tcl Used to control the length of the tick marks inside the panels. Default
+#' is -0.25.
 #' @param par.mgp Used to control the distance of the labels from the tick marks inside
 #' the panels. Default is c(2, 0.2, 0).
 #' @param par.lab Used to control the number of tick marks inside the panels. Format is
