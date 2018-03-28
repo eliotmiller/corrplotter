@@ -28,6 +28,7 @@
 #' @param pos.color The background color of the panel in the upper half of the plots for
 #' correlations with positive coefficients. Format the same as neg.color. Default is blue,
 #' with alpha 0.5.
+#' @param pt.col The color of the points in scatterplots. Default is black.
 #' @param par.oma Used to format the space around the entire plot (the area outside all
 #' panels). The format is c(bottom, left, top, right). Default is c(4, 4, 2, 2).
 #' @param par.tcl Used to control the length of the tick marks inside the panels. Default
@@ -38,17 +39,19 @@
 #' c(x, y, len). Although len is not implemented in R, it is necessary to pass along.
 #' Default is c(5, 5, 7).
 #' @param left.text The labels to be printed along each panel on the left margin of the
-#' figure. Must be the same length as the number of columns to be printed. If you do not
-#' want to print text along the last panel (the histogram), simply make the last element
-#' of the vector be equal to "".
+#' figure. A common thing people will want to do is to reverse the columns
+#' plotted along the bottom axis and drop the last one. Example of how to do this, if,
+#' for example, you are plotting all the columns of your data frame except the first:
+#' c(rev(names(yourDF[,2:dim(yourDF)[2]])),""). You actually don't need to bind the blank
+#' in in this example, but it's shown here for completeness.
 #' @param bottom.text Like left.text, but for the bottom axis labels.
 #' @param left.text.cex The size of the left.text labels. Defaults to 1.
 #' @param bottom.text.cex The size of the bottom.text labels. Defaults to 1.
 #' @param expansion Controls how much the histogram is shrunk down to facilitate plotting
 #' of histogram names. Also controls how zoomed out the scatterplots are, which might be
 #' useful for ensuring dots do not interfere with axis labels.
-#' @param ... Other arguments that can be passed to plot, including cex and color for the
-#' dots in the scatterplot.
+#' @param ... Other arguments that can be passed to plot, including cex for the
+#' dots in the scatterplot and for the axis labels.
 #'
 #' @details There are a large variety of options that can be customized on this function,
 #' but fundamentally it places scatterplots in the lower triangle of the plot, histograms
@@ -72,12 +75,12 @@
 #'	hist.names=c("one","two","three"), left.text=c("units1", "units2", ""),
 #'	bottom.text=c("other_units1", "other_units2", "other_units3"),
 #'	summary.cex=2, neg.color=c(1,0,0,1), mid.color=c(1,1,0,1), pos.color=c(0,1,0,1),
-#'	expansion=0.5, cex=0.5, col="gray")
+#'	expansion=0.5, cex=0.5, pt.col="gray")
 
 corrplotter <- function(dataframe, ids, hist.breaks, hist.col, hist.names,
 	hist.names.cex, hist.names.spacing, hist.y, summary.cex, neg.color, mid.color,
-	pos.color, par.oma, par.tcl, par.mgp, par.lab, left.text, bottom.text, left.text.cex,
-	bottom.text.cex, expansion, ...)
+	pos.color, pt.col, par.oma, par.tcl, par.mgp, par.lab, left.text, bottom.text,
+	left.text.cex, bottom.text.cex, expansion, ...)
 {
 	if(missing(ids))
 	{
@@ -141,6 +144,15 @@ corrplotter <- function(dataframe, ids, hist.breaks, hist.col, hist.names,
 	else
 	{
 		hist.col <- hist.col
+	}
+	
+	if(missing(pt.col))
+	{
+		pt.col <- "black"
+	}
+	else
+	{
+		pt.col <- pt.col
 	}
 	
 	if(missing(hist.names))
@@ -325,7 +337,7 @@ corrplotter <- function(dataframe, ids, hist.breaks, hist.col, hist.names,
 				hist(dataframe[,j], main="", breaks=hist.breaks, col=hist.col,
 					ylim=c(0, max(tempHist$counts) * (1 + expansion)),
 					xlim=c(	min(tempHist$breaks) - (xRange * expansion),
-							max(tempHist$breaks) + (xRange * expansion)))
+							max(tempHist$breaks) + (xRange * expansion)), ...)
 				#add the y-axis labels and titles
 				axis(side=2, labels=hist.y, tick=FALSE,
 					at=max(tempHist$counts) * (1 + expansion)/2, line=-1.5)
@@ -341,7 +353,7 @@ corrplotter <- function(dataframe, ids, hist.breaks, hist.col, hist.names,
 					xlim=c(	min(dataframe[,j]) - (xRange * expansion),
 							max(dataframe[,j]) + (xRange * expansion)),
 					ylim=c(	min(dataframe[,i]) - (yRange * expansion),
-							max(dataframe[,i]) + (yRange * expansion)), ...)
+							max(dataframe[,i]) + (yRange * expansion)), col=pt.col, ...)
 			}
 		}
 	}

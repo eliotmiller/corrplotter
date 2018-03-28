@@ -6,8 +6,8 @@
 \usage{
 corrplotter(dataframe, ids, hist.breaks, hist.col, hist.names, hist.names.cex,
   hist.names.spacing, hist.y, summary.cex, neg.color, mid.color, pos.color,
-  par.oma, par.tcl, par.mgp, par.lab, left.text, bottom.text, left.text.cex,
-  bottom.text.cex, expansion, ...)
+  pt.col, par.oma, par.tcl, par.mgp, par.lab, left.text, bottom.text,
+  left.text.cex, bottom.text.cex, expansion, ...)
 }
 \arguments{
 \item{dataframe}{The object you want to pull data from to plot.}
@@ -46,6 +46,8 @@ non-existent correlations. Format the same as neg.color. Default is white.}
 correlations with positive coefficients. Format the same as neg.color. Default is blue,
 with alpha 0.5.}
 
+\item{pt.col}{The color of the points in scatterplots. Default is black.}
+
 \item{par.oma}{Used to format the space around the entire plot (the area outside all
 panels). The format is c(bottom, left, top, right). Default is c(4, 4, 2, 2).}
 
@@ -60,9 +62,11 @@ c(x, y, len). Although len is not implemented in R, it is necessary to pass alon
 Default is c(5, 5, 7).}
 
 \item{left.text}{The labels to be printed along each panel on the left margin of the
-figure. Must be the same length as the number of columns to be printed. If you do not
-want to print text along the last panel (the histogram), simply make the last element
-of the vector be equal to "".}
+figure. A common thing people will want to do is to reverse the columns
+plotted along the bottom axis and drop the last one. Example of how to do this, if,
+for example, you are plotting all the columns of your data frame except the first:
+c(rev(names(yourDF[,2:dim(yourDF)[2]])),""). You actually don't need to bind the blank
+in in this example, but it's shown here for completeness.}
 
 \item{bottom.text}{Like left.text, but for the bottom axis labels.}
 
@@ -74,8 +78,8 @@ of the vector be equal to "".}
 of histogram names. Also controls how zoomed out the scatterplots are, which might be
 useful for ensuring dots do not interfere with axis labels.}
 
-\item{...}{Other arguments that can be passed to plot, including cex and color for the
-dots in the scatterplot.}
+\item{...}{Other arguments that can be passed to plot, including cex for the
+dots in the scatterplot and for the axis labels.}
 }
 \value{
 A paneled correlation plot.
@@ -100,6 +104,5 @@ corrplotter(dataframe=exData, hist.breaks=20, hist.col="purple",
 hist.names=c("one","two","three"), left.text=c("units1", "units2", ""),
 bottom.text=c("other_units1", "other_units2", "other_units3"),
 summary.cex=2, neg.color=c(1,0,0,1), mid.color=c(1,1,0,1), pos.color=c(0,1,0,1),
-expansion=0.5, cex=0.5, col="gray")
+expansion=0.5, cex=0.5, pt.col="gray")
 }
-

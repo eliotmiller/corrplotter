@@ -1,6 +1,6 @@
 Package: corrplotter
 Title: Creates paneled correlation plots
-Version: 0.0.0.9000
+Version: 0.1
 Authors@R: person("Eliot", "Miller", email = "eliot.isaac@gmail.com", role = c("aut", "cre"))
 Description: This makes fairly flexible paneled correlation plots, where you can
     change colors, breaks in histograms, axis labels, etc., as you see fit.
@@ -9,4 +9,4 @@ Depends:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
